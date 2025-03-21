@@ -9,7 +9,10 @@
     <ChatMessages :messages="messages" />
 
     <!--Mesages Box-->
-    <MessagesBox />
+    <!--<MessagesBox v-on:send-message="onNewMessage($event)" />-->
+
+    <!--Forma Corta-->
+    <MessagesBox @send-message="onNewMessage" />
   </div>
 </template>
 
@@ -28,4 +31,12 @@ const messages = ref<ChatMessage[]>([
     image: 'https://yesno.wtf/assets/yes/11-a23cbde4ae018bbda812d2d8b2b8fc6c.gif',
   },
 ]);
+
+const onNewMessage = (text: string) => {
+  messages.value.push({
+    id: new Date().getTime(),
+    itsMine: true,
+    message: text,
+  });
+};
 </script>
